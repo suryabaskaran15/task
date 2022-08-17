@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import CreateNew from './CreateNew';
 import './index.css';
-import App from './App';
+import LoginSuccess from './LoginSuccess';
+import MainLogIn from './MainLogIn';
 import reportWebVitals from './reportWebVitals';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MainLogIn/>
+    {/* <LoginSuccess id="12345" password="12345"/> */}
   </React.StrictMode>
 );
 
