@@ -9,24 +9,28 @@ class CreateNew extends React.Component {
             password: undefined,
             email: undefined,
             phoneNo: undefined,
-            flag: false
+            createNew : true,
+            flag: false,
+            backbtnFlag : false
         });
     }
-    created = () => {
-        this.setState({
+    created = async() => {
+        await this.setState({
             usrId: document.getElementById('usrid').value,
             password: document.getElementById('passWord').value,
             email: document.getElementById('email').value,
             phoneNo: document.getElementById('phoneNo').value,
-            flag: true,
-            backbtnFlag : false
-        })
-
-        console.log(this.state);
+            flag: true
+            })
+            this.userDetail.push(this.state);
+            console.log(this.userDetail);
     }
+    userDetail = [];
     render() {
         return (
             <div>
+            { this.state.createNew &&
+                <div>
                 <h1>Enter Your details</h1>
                 <br />
                 <label>User Id : </label>
@@ -43,13 +47,20 @@ class CreateNew extends React.Component {
                 <button onClick={this.created}>Create</button>
                 <button onClick={
                     ()=>{
-                        this.setState.backbtnFlag = true;
+                        this.setState({
+                            backbtnFlag : true,
+                            createNew : false,
+                            flag : false
+                        });
                     }
                 }>Back</button>
+                </div>
+                            }
 
-                {this.state.flag ? <h3>
+                {this.state.flag &&
+                 <>
                     <h1>Account created successfully.....!</h1>
-
+                    <h3>
                     user Id : {this.state.usrId}
                     <br />
                     Password : {this.state.password}
@@ -57,13 +68,12 @@ class CreateNew extends React.Component {
                     Email Id : {this.state.email}
                     <br />
                     Phone No : {this.state.phoneNo}
-                </h3>
-                    : null
+                    </h3>
+                </>
                 }
                 {
-                    this.state.backbtnFlag?
+                    this.state.backbtnFlag &&
                     <MainLogIn />
-                    :null
                 }
             </div>
         );

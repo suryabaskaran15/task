@@ -9,7 +9,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <MainLogIn/>
-    {/* <LoginSuccess id="12345" password="12345"/> */}
   </React.StrictMode>
 );
 

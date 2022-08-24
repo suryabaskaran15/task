@@ -10,7 +10,7 @@ class MainLogIn extends React.Component{
       password : undefined,
       logIn : false,
       createNew : false,
-      MainLogIn : true
+      MainLogIn : true,
     }
   }
   usrId = "12345";
@@ -23,7 +23,8 @@ class MainLogIn extends React.Component{
   if(this.usrId === this.state.usrId && this.passWord === this.state.password){
      this.setState({
       logIn:true,
-      createNew : false
+      createNew : false,
+      MainLogIn : false
     })
   }
   else{
@@ -47,7 +48,7 @@ class MainLogIn extends React.Component{
 
     return(
       <div>
-      {this.state.MainLogIn ?
+      {this.state.MainLogIn  &&
         <div>
             <h1>Login</h1>
             <label>User Id :  </label>
@@ -59,31 +60,17 @@ class MainLogIn extends React.Component{
             <br/>
             <button onClick={this.createNew}>Create New</button>
        </div>
-       : null
        }
       {this.state.logIn ? 
-      <LoginSuccess id = {this.state.usrId} password = {this.state.password}/> 
+      <LoginSuccess id = {this.state.usrId} password = {this.state.password} flag = {true} /> 
       : null}
-      {this.state.createNew  ?
+      {this.state.createNew  &&
             <CreateNew  />
-      : null
       }
-      {console.log("render")}
+
     </div>
     );
     
-  }
-  componentDidMount(){
-    console.log("componentDidMount")
-  }
-  componentDidUpdate(){
-    console.log("componentDidUpdate")
-  }
-  componentWillUpdate(){
-    console.log("componentwillupdate")
-  }
-  componentWillMount(){
-    console.log("componentWillMount");
   }
 }
 

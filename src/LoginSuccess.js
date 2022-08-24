@@ -1,23 +1,32 @@
 import React,{useState} from "react";
+import MainLogIn from "./MainLogIn";
 
 const LoginSuccess =(props)=>{
   
-  let usrdetail = {
-    usrId : props.id,
-    password : props.password
-  }
+let [id,NewId] = useState(props.id);
+let [password , NewPassword] = useState(props.password);
+let [flag,Newflag] = useState(props.flag);
 
+const back = ()=>{
+  Newflag(false);
+}
     return(
+      <div>
+        {flag ?
       <>
       <h1>Your log-in successful.....!</h1>
       <br/>
       <h3>
-        user Id :  {usrdetail.usrId}
+        user Id :  {id}
       <br/>
-      password :  {usrdetail.password}
+        password :  {password}
       </h3>
-      {console.log("sucessful..!")}
+      <button onClick={back}>Back</button>
       </>
+      : <MainLogIn />
+    }
+      </div>
+      
     );
   }
 
