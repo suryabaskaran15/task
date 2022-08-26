@@ -1,18 +1,28 @@
 import React,{useState} from "react";
 import MainLogIn from "./MainLogIn";
+import {
+  useLocation,
+  useNavigate,
+  useParams
+} from "react-router-dom";
 
 const LoginSuccess =(props)=>{
+const location = useLocation();
   
-let [id,NewId] = useState(props.id);
-let [password , NewPassword] = useState(props.password);
-let [flag,Newflag] = useState(props.flag);
-
+let [id,NewId] = useState(location.state.id);
+let [password , NewPassword] = useState(location.state.password);
+let [flag,Newflag] = useState(location.state.flag);
+const navigate = useNavigate();
+console.log(location);
 const back = ()=>{
-  Newflag(false);
+  navigate(-1);
+}
+
+const userDetails = ()=>{
+  
 }
     return(
       <div>
-        {flag ?
       <>
       <h1>Your log-in successful.....!</h1>
       <br/>
@@ -21,10 +31,9 @@ const back = ()=>{
       <br/>
         password :  {password}
       </h3>
+      <button onClick={userDetails}>User details</button>
       <button onClick={back}>Back</button>
       </>
-      : <MainLogIn />
-    }
       </div>
       
     );

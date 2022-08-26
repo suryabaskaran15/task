@@ -1,7 +1,12 @@
 import React from "react";
 import MainLogIn from "./MainLogIn"
+import {
+    useLocation,
+    useNavigate,
+    useParams
+  } from "react-router-dom";
 
-class CreateNew extends React.Component {
+class CreateNewClass extends React.Component {
     constructor() {
         super();
         this.state = ({
@@ -9,9 +14,7 @@ class CreateNew extends React.Component {
             password: undefined,
             email: undefined,
             phoneNo: undefined,
-            createNew : true,
             flag: false,
-            backbtnFlag : false
         });
     }
     created = async() => {
@@ -29,7 +32,6 @@ class CreateNew extends React.Component {
     render() {
         return (
             <div>
-            { this.state.createNew &&
                 <div>
                 <h1>Enter Your details</h1>
                 <br />
@@ -47,15 +49,11 @@ class CreateNew extends React.Component {
                 <button onClick={this.created}>Create</button>
                 <button onClick={
                     ()=>{
-                        this.setState({
-                            backbtnFlag : true,
-                            createNew : false,
-                            flag : false
-                        });
+                        this.props.navigate(-1);
+                        
                     }
                 }>Back</button>
                 </div>
-                            }
 
                 {this.state.flag &&
                  <>
@@ -71,13 +69,20 @@ class CreateNew extends React.Component {
                     </h3>
                 </>
                 }
-                {
-                    this.state.backbtnFlag &&
-                    <MainLogIn />
-                }
+               
             </div>
         );
     }
+}
+
+const CreateNew = () => {
+    let location = useLocation();
+      let navigate = useNavigate();
+      let params = useParams();
+
+    return <CreateNewClass 
+    navigate={navigate}
+    />
 }
 
 export default CreateNew;

@@ -1,8 +1,12 @@
 import React from 'react';
 import CreateNew from './CreateNew';
 import LoginSuccess from './LoginSuccess';
-
-class MainLogIn extends React.Component{
+import {
+  useLocation,
+  useNavigate,
+  useParams
+} from "react-router-dom";
+class MainLogInClass extends React.Component{
   constructor(){
     super();
     this.state ={
@@ -21,26 +25,20 @@ class MainLogIn extends React.Component{
     password : document.getElementById('password').value
   })
   if(this.usrId === this.state.usrId && this.passWord === this.state.password){
-     this.setState({
-      logIn:true,
-      createNew : false,
-      MainLogIn : false
-    })
+    this.props.navigate("/loginSuccess",{
+      state:{
+        id:this.state.usrId,
+        password:this.state.password,
+        flag:true
+      }
+    });
   }
   else{
-    this.setState({
-      logIn : false,
-      createNew : false
-    })
     alert("Enter correct userid and password");
   }
  }
   createNew =()=>{
-    this.setState({
-      createNew : true,
-      logIn : false,
-      MainLogIn : false
-    })
+    this.props.navigate("/create");
   }
   
   render(){
@@ -48,7 +46,6 @@ class MainLogIn extends React.Component{
 
     return(
       <div>
-      {this.state.MainLogIn  &&
         <div>
             <h1>Login</h1>
             <label>User Id :  </label>
@@ -60,19 +57,19 @@ class MainLogIn extends React.Component{
             <br/>
             <button onClick={this.createNew}>Create New</button>
        </div>
-       }
-      {this.state.logIn ? 
-      <LoginSuccess id = {this.state.usrId} password = {this.state.password} flag = {true} /> 
-      : null}
-      {this.state.createNew  &&
-            <CreateNew  />
-      }
-
     </div>
     );
     
   }
 }
 
+
+const  MainLogIn = ()=>{
+  let navigate = useNavigate();
+  let location = useLocation();
+  return(
+    <MainLogInClass navigate = {navigate} />
+  )
+}
 
 export default MainLogIn;
