@@ -12,9 +12,6 @@ class MainLogInClass extends React.Component{
     this.state ={
       usrId : undefined ,
       password : undefined,
-      logIn : false,
-      createNew : false,
-      MainLogIn : true,
     }
   }
   usrId = "12345";

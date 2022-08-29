@@ -19,7 +19,7 @@ const back = ()=>{
 }
 
 const userDetails = ()=>{
-  
+  navigate("/loginSuccess/ApiDetails");
 }
     return(
       <div>

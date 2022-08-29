@@ -3,6 +3,8 @@ import CreateNew from "./CreateNew";
 import LoginSuccess from "./LoginSuccess";
 import MainLogIn from "./MainLogIn"
 import { BrowserRouter, Routes ,Route} from "react-router-dom";
+import ApiDetails from "./ApiDetails";
+import UserDetails from "./Userdetails";
 
 
 const Routing = ()=>{
@@ -11,6 +13,8 @@ const Routing = ()=>{
             <Route path = "/" element ={<MainLogIn/>}/>
             <Route path ="/create" element ={<CreateNew/>}/>
             <Route path = "/loginSuccess" element = {<LoginSuccess/>} />
+            <Route path = "/loginSuccess/ApiDetails" element={<ApiDetails/>}/>
+            <Route path="/loginSuccess/ApiDetails/UserDetail" element={<UserDetails/>}/>
         </Routes>
     );
 }
