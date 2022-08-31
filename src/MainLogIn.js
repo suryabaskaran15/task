@@ -1,6 +1,5 @@
 import React from 'react';
-import CreateNew from './CreateNew';
-import LoginSuccess from './LoginSuccess';
+import ComponentRendering from './ComponentRendering';
 import {
   useLocation,
   useNavigate,
@@ -69,4 +68,4 @@ const  MainLogIn = ()=>{
   )
 }
 
-export default MainLogIn;
+export default ComponentRendering(MainLogIn);

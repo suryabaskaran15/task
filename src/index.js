@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CreateNew from './CreateNew';
 import './index.css';
-import LoginSuccess from './LoginSuccess';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Comp from './comp';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

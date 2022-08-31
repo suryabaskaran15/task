@@ -5,6 +5,7 @@ import {
   useNavigate,
   useParams
 } from "react-router-dom";
+import ComponentRendering from "./ComponentRendering";
 
 const LoginSuccess =(props)=>{
 const location = useLocation();
@@ -13,7 +14,6 @@ let [id,NewId] = useState(location.state.id);
 let [password , NewPassword] = useState(location.state.password);
 let [flag,Newflag] = useState(location.state.flag);
 const navigate = useNavigate();
-console.log(location);
 const back = ()=>{
   navigate(-1);
 }
@@ -39,4 +39,4 @@ const userDetails = ()=>{
     );
   }
 
-  export default LoginSuccess;
+  export default ComponentRendering(LoginSuccess);

@@ -1,14 +1,15 @@
 import React from "react";
-import MainLogIn from "./MainLogIn"
+import ComponentRendering from "./ComponentRendering";
 import {
     useLocation,
     useNavigate,
-    useParams
+    useParams,link
   } from "react-router-dom";
 
-class CreateNewClass extends React.Component {
+class CreateNewClass extends React.PureComponent {
     constructor() {
         super();
+        this.textInput = React.createRef();
         this.state = ({
             usrId: undefined,
             password: undefined,
@@ -29,6 +30,9 @@ class CreateNewClass extends React.Component {
             console.log(this.userDetail);
     }
     userDetail = [];
+    componentDidMount() {
+        this.textInput.current.focus();
+      }
     render() {
         return (
             <div>
@@ -36,7 +40,7 @@ class CreateNewClass extends React.Component {
                 <h1>Enter Your details</h1>
                 <br />
                 <label>User Id : </label>
-                <input id="usrid" type={'number'} />
+                <input id="usrid" type={'number'} ref={this.textInput} />
                 <br />
                 <label>Password : </label>
                 <input id="passWord" type={'number'} />
@@ -85,4 +89,4 @@ const CreateNew = () => {
     />
 }
 
-export default CreateNew;
+export default ComponentRendering(CreateNew);
