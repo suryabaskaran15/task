@@ -1,71 +1,44 @@
-import React from 'react';
-import ComponentRendering from './ComponentRendering';
-import {
-  useLocation,
-  useNavigate,
-  useParams
-} from "react-router-dom";
-class MainLogInClass extends React.Component{
-  constructor(){
-    super();
-    this.state ={
-      usrId : undefined ,
-      password : undefined,
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase";
+
+const MainLogIn = () => {
+  const navigate = useNavigate();
+  const verify = async (id, password) => {
+    const userVerify = await (await getDoc(doc(db, "user", id))).data();
+
+    if (userVerify.userId === id && userVerify.Password === password) {
+      navigate(`/loginSuccess/${id}`, { state: true });
+    } else {
+      alert("Enter correct userid and password");
     }
-  }
-  usrId = "12345";
-  passWord = "12345";
- verify = async ()=>{
- await this.setState({
-    usrId : document.getElementById('usrId').value,
-    password : document.getElementById('password').value
-  })
-  if(this.usrId === this.state.usrId && this.passWord === this.state.password){
-    this.props.navigate("/loginSuccess",{
-      state:{
-        id:this.state.usrId,
-        password:this.state.password,
-        flag:true
-      }
-    });
-  }
-  else{
-    alert("Enter correct userid and password");
-  }
- }
-  createNew =()=>{
-    this.props.navigate("/create");
-  }
-  
-  render(){
-    
-
-    return(
-      <div>
-        <div>
-            <h1>Login</h1>
-            <label>User Id :  </label>
-            <input id='usrId' type={'number'}/>
-            <br/>
-            <label>Password :  </label>
-            <input id='password' type={"password"}/> <br/>
-            <button  onClick={this.verify}>Okay</button>
-            <br/>
-            <button onClick={this.createNew}>Create New</button>
-       </div>
+  };
+  const signUp = () => {
+    navigate("/create");
+  };
+  return (
+    <div>
+      <h1>Login</h1>
+      <label>User Id : </label>
+      <input id="usrId" type={"text"} />
+      <br />
+      <label>Password : </label>
+      <input id="password" type={"text"} /> <br />
+      <button
+        onClick={() => {
+          verify(
+            document.getElementById("usrId").value,
+            document.getElementById("password").value
+          );
+        }}
+      >
+        Okay
+      </button>
+      <br />
+      <button onClick={signUp}>Sign Up</button>
     </div>
-    );
-    
-  }
-}
+  );
+};
 
-
-const  MainLogIn = ()=>{
-  let navigate = useNavigate();
-  let location = useLocation();
-  return(
-    <MainLogInClass navigate = {navigate} />
-  )
-}
-
-export default ComponentRendering(MainLogIn);
+export default MainLogIn;
